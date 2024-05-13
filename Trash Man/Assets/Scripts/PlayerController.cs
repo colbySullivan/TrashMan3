@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     float xInput;
     float yInput;
 
+    int score = 0;
+    public int winScore;
+
+    public GameObject winText;
 
     private void Awake()
     {
@@ -43,5 +47,23 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(xInput * speed, 0, yInput * speed);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Coin")
+        {
+            other.gameObject.SetActive(false);
+
+            score++;
+
+            if(score >= winScore)
+            {
+                //win condition met
+                winText.SetActive(true);
+            }
+        }
+
+
+
+    }
 
 }
